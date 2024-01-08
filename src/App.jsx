@@ -1,61 +1,35 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import Mainframe from './Mainframe';
-import Sidebar from './Sidebar';
-import uuid from 'react-uuid';
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-export default function App() {
-  const [notes, setNotes] = useState(JSON.parse(localStorage.notes) || []);
-  const [activeNote, setActiveNote] = useState(false);
-
-  useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
-
-  const onAddNote = () => {
-    const newNote = {
-      id: uuid(),
-      title: "Untitled Note",
-      body: "aa",
-      lastModified: Date.now(),
-    }
-
-    setNotes([newNote, ...notes]);
-  }
-
-  const onUpdateNote = (updatedNote) => {
-    const updatedNotesArr = notes.map((note) => {
-      if (note.id === updatedNote.id) {
-        return updatedNote;
-      }
-
-      return note;
-    });
-
-    setNotes(updatedNotesArr);
-  };
-
-  const onDeleteNote = (idToDelete) => {
-    setNotes(notes.filter((note) => note.id !== idToDelete));
-  }
-
-  const getActiveNote = () => {
-    return notes.find((note) => note.id === activeNote);
-  }
+function App() {
+  const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <Sidebar
-        notes={notes}
-        onAddNote={onAddNote}
-        onDeleteNote={onDeleteNote}
-        activeNote={activeNote}
-        setActiveNote={setActiveNote}
-      />
-      <Mainframe
-        activeNote={getActiveNote()}
-        onUpdateNote={onUpdateNote}
-      />
-    </div>
-  );
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
 }
+
+export default App

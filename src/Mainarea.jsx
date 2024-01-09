@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+
 export default function Mainarea({ activeNote, onUpdateNote }) {
 
     const onEditField = (key, value) => {
@@ -31,8 +33,8 @@ export default function Mainarea({ activeNote, onUpdateNote }) {
             </div>
             <div className="app-main-note-preview">
                 <h1 className="preview-title">{activeNote.title}</h1>
-                <div className="markdown-preview">{activeNote.body}</div>
-            </div>
-        </div>
+                <ReactMarkdown className="markdown-preview">{activeNote.body}</ReactMarkdown>
+            </div >
+        </div >
     );
 }

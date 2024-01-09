@@ -9,7 +9,9 @@ export default function Sidebar({ notes, onAddNote, onDeleteNote, activeNote, se
                 {notes.map((note, i) => (
                     <div
                         key={i}
-                        className="app-sidebar-note">
+                        className={`app-sidebar-note ${note.id === activeNote && "active"}`}
+                        onClick={() => setActiveNote(note.id)}
+                    >
                         <div className="sidebar-note-title">
                             <strong>{note.title}</strong>
                             <button onClick={() => onDeleteNote(note.id)}>Delete</button>
@@ -24,6 +26,6 @@ export default function Sidebar({ notes, onAddNote, onDeleteNote, activeNote, se
                     </div>
                 ))}
             </div>
-        </div>
+        </div >
     );
 }

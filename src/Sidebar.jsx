@@ -1,19 +1,28 @@
-export default function Sidebar() {
+export default function Sidebar({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote }) {
     return (
         <div className="app-sidebar">
             <div className="app-sidebar-header">
                 <h1>Notes</h1>
-                <button>Add</button>
+                <button onClick={onAddNote}>Add</button>
             </div>
             <div className="app-sidebar-notes">
-                <div className="app-sidebar-note">
-                    <div className="sidebar-note-title">
-                        <strong>TITLE</strong>
-                        <button>DELETE</button>
+                {notes.map((note, i) => (
+                    <div
+                        key={i}
+                        className="app-sidebar-note">
+                        <div className="sidebar-note-title">
+                            <strong>{note.title}</strong>
+                            <button onClick={() => onDeleteNote(note.id)}>Delete</button>
+                        </div>
+                        <p>{note.body && note.body.substr(0, 100) + "..."}</p>
+                        <small className="note-meta">
+                            Last modified {new Date(note.lastModified).toLocaleDateString("ja-JP", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })}
+                        </small>
                     </div>
-                    <p>Note preview</p>
-                    <small className="note-meta">Last modified [date]</small>
-                </div>
+                ))}
             </div>
         </div>
     );

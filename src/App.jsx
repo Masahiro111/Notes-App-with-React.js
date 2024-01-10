@@ -19,24 +19,8 @@ export default function App() {
     setNotes([newNote, ...notes]);
   }
 
-  const onUpdateNote = (updatedNote) => {
-    const updatedNoteArray = notes.map((note) => {
-      if (note.id === activeNote) {
-        return updatedNote;
-      }
-
-      return note;
-    });
-
-    setNotes(updatedNoteArray);
-  }
-
   const onDeleteNote = (idToDelete) => {
     setNotes(notes.filter((note) => note.id !== idToDelete));
-  }
-
-  const getActiveNote = () => {
-    return notes.find((note) => note.id === activeNote);
   }
 
   return (
@@ -49,10 +33,7 @@ export default function App() {
           activeNote={activeNote}
           setActiveNote={setActiveNote}
         />
-        <Mainarea
-          activeNote={getActiveNote()}
-          onUpdateNote={onUpdateNote}
-        />
+        <Mainarea />
       </div>
     </>
   );
